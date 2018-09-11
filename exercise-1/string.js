@@ -21,9 +21,32 @@ function snake_case(string){
 }
 console.log(snake_case("coucou toi"));
 
-function prop_access(object, string){
-    //prairie, animal.type.name
+testObject = {prairie:
+        {animal: {
+                type: "mamal",
+                name: "goat"}
+        }
+};
+function prop_access(obj, path) {
+    return path.split('.').reduce(function(prev, curr) {
+        return prev ? prev[curr] : null
+    }, obj || self)
 }
+console.log(prop_access(testObject, "prairie.animal"))
+/* Test with reccursion
+function prop_access(object, string) {
+    let lookingFor = string.split('.');
+    var i=0;
+    (function test(object, lookingFor) {
+        i++;
+        //const test = lookingFor.shift();
+        console.log(lookingFor)
+        //if (test === undefined || object.test === undefined) return object;
+        test(object.test, lookingFor);
+    })().bind();
+}
+console.log(prop_access(testObject, "prairie.animal.type"))
+*/
 
 function leet(string){
     chars = string.split('');
